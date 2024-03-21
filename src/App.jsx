@@ -1,20 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import TaskInput from './components/TaskInput';
 import TaskList from './components/TaskList';
 
-
-
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+
+    // id, title, done
+
+    setTasks([...tasks, {id: Date.now(), text: task, done: false}])
+
+    // localStorage 
+
+  }
+
+  const deleteTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  }
 
   return (
     <>
     <h1> Lista de Tarefas</h1>
-    <TaskInput />
-    <TaskList />
+    <TaskInput onAddTask={addTask}/>
+    <TaskList tasks={tasks} onDeleteTask={deleteTask} />
     </>
   )
 }
