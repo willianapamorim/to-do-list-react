@@ -4,16 +4,17 @@ import TaskInput from './components/TaskInput';
 import TaskList from './components/TaskList';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem('tasks')) ||  []
+    );
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   const addTask = (task) => {
-
     // id, title, done
-
-    setTasks([...tasks, {id: Date.now(), text: task, done: false}])
-
-    // localStorage 
-
+    setTasks([...tasks, {id: Date.now(), text: task, done: false}]);
   }
 
   const deleteTask = (taskId) => {
