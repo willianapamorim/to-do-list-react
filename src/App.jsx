@@ -20,11 +20,17 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== taskId));
   }
 
+  const toggleTaskDone = (taskId) => {
+    setTasks(tasks.map((task) => task.id === taskId ? {...task, done: !task.done} : task))
+  }
+
   return (
     <>
     <h1> Lista de Tarefas</h1>
     <TaskInput onAddTask={addTask}/>
-    <TaskList tasks={tasks} onDeleteTask={deleteTask} />
+    <TaskList tasks={tasks} 
+    onDeleteTask={deleteTask} 
+    onToggleTaskDone={toggleTaskDone}/>
     </>
   )
 }
